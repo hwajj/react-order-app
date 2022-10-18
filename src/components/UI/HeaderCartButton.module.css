@@ -1,0 +1,13 @@
+.btnClasses {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  padding: 10px;
+  margin: 10px;
+}
+
+svg {
+  width: 50px;
+  padding: 0;
+}
