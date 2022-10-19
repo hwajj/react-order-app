@@ -4,8 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import Items from './components/Menu/Items';
 import Header from './components/UI/Header';
 import { addToCart, removeFromCart, getCartTotal } from './modules/cart';
+import { setUserInfo } from './modules/login';
 import ItemsContainer from './containers/ItemsContainer';
 import Cart from './components/Cart/Cart';
+
 import jwt_decode from 'jwt-decode';
 
 function App() {
@@ -13,9 +15,14 @@ function App() {
   const [user, setUser] = useState({});
   function handleCallbackResponse(response) {
     console.log('Encoded JWT ID token : ' + response.credential);
-    let userObject = jwt_decode(response.credential);
+    var userObject = jwt_decode(response.credential);
     console.log(userObject);
-    setUser(userObject);
+    //함수형 setState사용해야함
+    setUser((prev) => {
+      return { ...prev, userObject };
+    });
+    console.log(user);
+
     document.getElementById('signInDiv').hidden = true;
   }
   function handleSignOut(event) {
@@ -24,20 +31,32 @@ function App() {
   }
   useEffect(() => {
     /* global google */
+    async function test() {
+      await google.accounts.id.initialize({
+        client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+        callback: handleCallbackResponse,
+      });
 
-    google.accounts.id.initialize({
-      client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-      callback: handleCallbackResponse,
-    });
+      await google.accounts.id.renderButton(
+        document.getElementById('signInDiv'),
+        {
+          theme: 'outline',
+          size: 'large',
+        }
+      );
 
-    google.accounts.id.renderButton(document.getElementById('signInDiv'), {
-      theme: 'outline',
-      size: 'large',
-    });
+      await google.accounts.id.prompt();
+    }
 
-    google.accounts.id.prompt();
-  }, []);
+    test();
+    const userInfo = {
+      name: user.userObject?.name,
+      email: user.userObject?.email,
+    };
+    dispatch(setUserInfo(userInfo));
+  }, [user]);
 
+  const userInfo = useSelector((state) => state.login.user);
   //user 없음 -> 로그인버튼
   //user 있음 -> 로그아웃버튼
 
@@ -77,7 +96,7 @@ function App() {
           onIncrease={onIncrease}
           onDecrease={onDecrease}
           total={getCartTotal}
-          userName={user.name}
+          user={userInfo}
         />
       )}
       <div id='signInDiv' />
