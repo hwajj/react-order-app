@@ -8,7 +8,6 @@ export const removeFromCart = (id) => ({ type: REMOVE_FROM_CART, id });
 
 const initialState = {
   items: [],
-  //cart : [{id: 1, name}, {id:1}]
 };
 
 export const getCartTotal = (items) => {
