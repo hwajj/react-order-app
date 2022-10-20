@@ -1,6 +1,7 @@
 import './App.css';
 import { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import Items from './components/Menu/Items';
 import Header from './components/UI/Header';
 import {
@@ -13,8 +14,9 @@ import { logIn, logOut } from './modules/login';
 import ItemsContainer from './containers/ItemsContainer';
 import Cart from './components/Cart/Cart';
 import firebase from 'firebase/compat/app';
-import { auth, signInWithGoogle } from './firebase';
+import { signInWithGoogle, signOutHandler } from './firebase';
 import jwt_decode from 'jwt-decode';
+import { useAuth } from './components/Login/useAuth';
 
 function App() {
   //구글 로그인
@@ -30,15 +32,17 @@ function App() {
 
   //   document.getElementById('signInDiv').hidden = true;
   // }
+  const auth = useAuth().auth;
+  console.log(auth);
+  const user_ = useAuth().user;
 
   useEffect(() => {
-    /* google 로그인 */
+    /* global google */
     // async function test() {
     //   await google.accounts.id.initialize({
     //     client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
     //     callback: handleCallbackResponse,
     //   });
-
     //   await google.accounts.id.renderButton(
     //     document.getElementById('signInDiv'),
     //     {
@@ -46,20 +50,26 @@ function App() {
     //       size: 'large',
     //     }
     //   );
-
     //   await google.accounts.id.prompt();
     // }
-
     // test();
-
     // const userInfo = {
     //   name: user.userObject?.name,
     //   email: user.userObject?.email,
     // };
     // dispatch(setUserInfo(userInfo));
+    //console.log(auth);
 
-    console.log(auth);
-  }, []);
+    user_ &&
+      dispatch(
+        logIn({
+          name: user_?.displayName,
+          id: user_?.email,
+          uid: user_?.uid,
+          photo: user_?.photoURL,
+        })
+      );
+  }, [user_]);
 
   const userInfo = useSelector((state) => state.login.user);
   //user 없음 -> 로그인버튼
@@ -92,12 +102,14 @@ function App() {
     setCartIsShown(false);
   };
   function logoutHandler(event) {
+    signOutHandler(auth);
     dispatch(logOut());
     dispatch(emptyCart());
     document.getElementById('signInDiv').hidden = false;
   }
   const loginHandler = async () => {
-    const user = await signInWithGoogle();
+    // console.log(auth);
+    const user = await signInWithGoogle(auth);
     console.log(user);
     setUser((prev) => {
       return { ...prev, user };
@@ -128,7 +140,7 @@ function App() {
           user={userInfo}
         />
       )}
-
+      {/* <Login /> */}
       <div id='signInDiv'>
         <button onClick={loginHandler}>구글로 로그인</button>
       </div>
