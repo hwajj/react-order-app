@@ -1,11 +1,12 @@
 //액션 생성
 const ADD_TO_CART = 'cart/ADD';
 const REMOVE_FROM_CART = 'cart/REMOVE';
+const EMPTY_CART = 'cart/EMPTY';
 
 //액션생성함수
 export const addToCart = (item) => ({ type: ADD_TO_CART, item });
 export const removeFromCart = (id) => ({ type: REMOVE_FROM_CART, id });
-
+export const emptyCart = () => ({ type: EMPTY_CART });
 const initialState = {
   items: [],
 };
@@ -68,7 +69,8 @@ const cartReducer = (state = initialState, action) => {
       }
 
       return { ...state, items: newItems };
-
+    case EMPTY_CART:
+      return { ...state, items: [] };
     default:
       return state;
   }
