@@ -88,7 +88,6 @@ input:focus {
 .itemInfo button {
   font-size: 1.1rem;
   border: 0px;
-  cursor: pointer;
   margin: 10px;
   margin-bottom: 19px;
   border: 1px solid grey;

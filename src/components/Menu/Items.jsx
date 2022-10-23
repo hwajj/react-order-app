@@ -1,6 +1,5 @@
 import React from 'react';
 import Item from './Item';
-
 import classes from './Items.module.css';
 import menuList from './menuList';
 
