@@ -7,16 +7,17 @@
 }
 
 .content {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  font-size: 2rem;
-  margin: 20px;
+  width: 90%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 100px 200px 200px auto;
+  font-size: 1rem;
+  border-top: 1px solid #aaa;
+  padding: 4px;
 }
 
-.address {
-  font-size: 1.5rem;
-  width: 500px;
+.content div:nth-child(3) {
+  align-self: start;
 }
 
 .title {

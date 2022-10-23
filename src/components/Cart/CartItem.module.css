@@ -9,10 +9,18 @@ h2 {
   width: 600px;
 }
 .summary {
-  width: 70%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
+}
+
+.summary h2 {
+  width: 250px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 .actions {

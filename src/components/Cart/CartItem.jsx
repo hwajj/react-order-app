@@ -5,10 +5,7 @@ const CartItem = ({ name, amount, price, onRemove, onAdd, didSubmit }) => {
   console.log(didSubmit);
   return (
     <li className={classes['cart-item']}>
-      <div
-        style={{ justifyContent: 'space-around', flexDirection: 'row' }}
-        className={classes.summary}
-      >
+      <div className={classes.summary}>
         <h2>{name}</h2>
         <span className={classes.price}>{price}원</span>
       </div>

@@ -10,7 +10,10 @@ const OrderList = ({ onClose, orderedList }) => {
   let dateArr = [];
   dateArr_.map((e) => dateArr.push(new Date(e)));
   dateArr = dateArr.map(
-    (e) => `${e.getFullYear()}-${e.getMonth() + 1}-${e.getDate() + 1}`
+    (e) =>
+      `${e.getFullYear()}-${e.getMonth() + 1}-${
+        e.getDate() + 1
+      } ${e.getHours()} : ${e.getMinutes()}`
   );
   let addressArr = Object.values(orderedList)
     .map((e) => e.addressInfo)
@@ -34,6 +37,7 @@ const OrderList = ({ onClose, orderedList }) => {
             {itemsArr.map((e, i) => {
               return (
                 <div key={i} className={classes.content}>
+                  <div className={classes.number}>{i + 1}</div>
                   <div className={classes.date}>{dateArr[i]}</div>
                   <div className={classes.items}>
                     {e.map((innerElement) => (
