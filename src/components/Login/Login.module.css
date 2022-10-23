@@ -1,0 +1,26 @@
+.loginContainer {
+  position: absolute;
+  float: left;
+  top: 0;
+  left: 0;
+  width: auto;
+  margin: 20px;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.userInfo h3 {
+  font-size: 1.2rem;
+}
+
+.loginContainer button {
+  width: auto;
+  height: 40px;
+  font-size: 1.2rem;
+  vertical-align: bottom;
+  margin: 20px;
+}
