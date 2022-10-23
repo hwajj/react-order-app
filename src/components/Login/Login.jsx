@@ -54,7 +54,9 @@ const Login = (props) => {
       )}
       {userInfo && Object.keys(userInfo).length !== 0 && (
         <div className={classes.userInfo}>
-          <h3> {userInfo?.name} 님 반갑습니다</h3>
+          <h3>
+            {userInfo?.name} <span>님 반갑습니다</span>
+          </h3>
           <button onClick={(e) => logoutHandler(e)}>로그아웃</button>
         </div>
       )}

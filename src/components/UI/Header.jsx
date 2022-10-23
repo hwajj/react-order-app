@@ -12,15 +12,14 @@ const Header = ({ onShowCart, onShowOrderList, onLoadOrderList }) => {
         <div className={classes.login}>
           <Login />
         </div>
-
-        <h1 className={classes.title}> 시스터즈 샌드위치</h1>
-        <div className={classes.orderList}>
+        <div className={classes.title}>
+          <h1> 시스터즈 샌드위치</h1>
+        </div>
+        <div className={classes.buttonContainer}>
           <OrderListButton
             onShowOrderList={onShowOrderList}
             onLoadOrderList={onLoadOrderList}
           />
-        </div>
-        <div className={classes.button}>
           <HeaderCartButton onShowCart={onShowCart} />
         </div>
       </header>

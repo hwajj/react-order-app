@@ -51,9 +51,9 @@
   z-index: 5;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
-  font-size: 3rem;
+  font-size: 2rem;
 }
 .overlay:hover .description,
 .overlay:hover .price {
@@ -73,20 +73,47 @@
   display: flex;
   align-items: center;
   margin-bottom: 0.5rem;
-  font: inherit;
+  font-size: 1.2rem;
 }
 input:focus {
   outline: 0;
 }
-
+.price {
+  margin: 0;
+}
 .description {
+  margin: 0;
 }
 
 .itemInfo button {
-  font-size: 2.6rem;
+  font-size: 1.1rem;
   border: 0px;
   cursor: pointer;
-  margin: 20px;
-  margin-bottom: 26px;
-  padding: 10px;
+  margin: 10px;
+  margin-bottom: 19px;
+  border: 1px solid grey;
+  border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+  .overlay {
+    font-size: 2rem;
+  }
+
+  .photo {
+    width: 70%;
+    height: 266px;
+  }
+
+  .itemInfo button {
+    font-size: 1rem;
+  }
+
+  .input {
+    height: 30px;
+  }
+
+  .itemInfo {
+    font-size: 2rem;
+  }
 }
