@@ -47,15 +47,14 @@ const Login = (props) => {
 
     // userInfo && auth.createUserWithEmailAndPassword(userInfo.id, userInfo.uid);
   }, [user_]);
-
+  const loginFlag = !userInfo || Object.keys(userInfo).length == 0 || !user_;
   return (
     <div className={classes.loginContainer}>
-      {!userInfo ||
-        (Object.keys(userInfo).length == 0 && (
-          <div id='signInDiv'>
-            <button onClick={loginHandler}>구글로 로그인</button>
-          </div>
-        ))}
+      {loginFlag && (
+        <div id='signInDiv'>
+          <button onClick={loginHandler}>구글로 로그인</button>
+        </div>
+      )}
       {userInfo && Object.keys(userInfo).length != 0 && (
         <div className={classes.userInfo}>
           <h3> {userInfo?.name} 님 반갑습니다</h3>
