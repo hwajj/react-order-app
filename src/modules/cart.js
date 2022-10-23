@@ -43,14 +43,21 @@ const cartReducer = (state = initialState, action) => {
       const removeItemIdx = state.items.findIndex(
         (item) => item.id === action.id
       );
-
+      const existingItem_ = state.items[removeItemIdx];
       let newItems = [...state.items];
-      let newAmount = newItems[removeItemIdx].amount--;
-      if (newAmount === 1) {
+
+      const newAmount = existingItem_.amount - 1;
+      const upDatedItem = {
+        ...existingItem_,
+        amount: newAmount,
+      };
+
+      newItems[removeItemIdx] = upDatedItem;
+      if (newAmount === 0) {
         newItems.splice(removeItemIdx, 1);
       }
 
-      return { ...state, items: newItems };
+      return { ...state, items: [...newItems] };
     case EMPTY_CART:
       return { ...state, items: [] };
     default:
