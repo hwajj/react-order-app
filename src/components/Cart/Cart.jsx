@@ -85,16 +85,20 @@ const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
   console.log(items);
   console.log(userAddress);
   const didSubmitModalContent = (
-    <>
+    <div className={classes.orderComplete}>
       <p>주문완료</p>
-      <div>{rdxAddress}</div>
+
       <div>{cartItems}</div>
-      <div className={classes.actions}>
+      <hr />
+      <div className={classes.price}> {total(items)}원 </div>
+      <div className={classes.address}> {rdxAddress}</div>
+      <div className={classes.message}> 감사합니다 ! </div>
+      <div>
         <button className={classes.button} onClick={onClose}>
-          Close
+          닫기
         </button>
       </div>
-    </>
+    </div>
   );
 
   return (
