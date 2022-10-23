@@ -5,4 +5,38 @@ h2 {
 .cart-item {
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
+  width: 600px;
+}
+.summary {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.actions {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.actions span {
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.actions button {
+  cursor: pointer;
+  margin: 10px;
+  font-size: 1.3rem;
+  vertical-align: middle;
+}
+
+.actions span {
+  vertical-align: middle;
 }
