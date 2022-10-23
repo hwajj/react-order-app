@@ -9,12 +9,14 @@ const HeaderCartButton = (props) => {
     btnIsHighlighted ? classes.bump : ''
   }`;
   return (
-    <button className={classes.btnClasses} onClick={props.onShowCart}>
-      <span className={classes.icon}>
-        <CartIcon />
-      </span>
-      <span className={classes.badge}>{}</span>
-    </button>
+    <div className={classes.cartBtnContainer}>
+      <button className={classes.btnClasses} onClick={props.onShowCart}>
+        <span className={classes.icon}>
+          <CartIcon />
+        </span>
+        <span className={classes.badge}>{}</span>
+      </button>
+    </div>
   );
 };
 

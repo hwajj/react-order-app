@@ -59,6 +59,10 @@ li:nth-child(6) {
   align-items: center;
   font-size: 3rem;
 }
+.overlay:hover .description,
+.overlay:hover .price {
+  opacity: 0;
+}
 
 .itemInfo {
   width: 100%;
@@ -66,6 +70,7 @@ li:nth-child(6) {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  opacity: 1;
 }
 
 .input {
@@ -78,17 +83,14 @@ input:focus {
   outline: 0;
 }
 
-.container:hover .overlay {
-  color: gold;
-  z-index: 99;
-}
-
 .description {
 }
 
-button {
-  margin: 20px;
-  font-size: 3rem;
+.itemInfo button {
+  font-size: 2.6rem;
   border: 0px;
   cursor: pointer;
+  margin: 20px;
+  margin-bottom: 26px;
+  padding: 10px;
 }
