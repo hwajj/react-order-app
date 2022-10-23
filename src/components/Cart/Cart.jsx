@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
 import classes from './Cart.module.css';
 import Modal from '../UI/Modal';
 import Item from '../Menu/Item';
@@ -7,10 +9,13 @@ import Checkout from './Checkout';
 
 const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
   console.log(user);
-
+  console.log(items);
   const [order, setOrder] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [didSubmit, setDidSubmit] = useState(false);
+  const [userAddress, setUserAddress] = useState('');
+  const rdxAddress = useSelector((state) => state.login.user.address);
+
   console.log(total(items));
   //주문서 아이템 -1
   const cartItemRemoveHandler = (id) => {
@@ -25,18 +30,27 @@ const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
 
   const submitOrderHandler = async (userData) => {
     setIsSubmitting(true);
-    await fetch(process.env.REACT_APP_FIREBASE + '/orders.json', {
-      method: 'POST',
-      body: JSON.stringify({
-        user: userData,
-        orderedItems: items,
-      }),
-    });
+    setUserAddress(userAddress);
+    const today = new Date();
+    const msg = await fetch(
+      process.env.REACT_APP_FIREBASE + `/${user.uid}.json`,
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          addressInfo: userData,
+          orderedItems: items,
+          date: today,
+        }),
+      }
+    );
+
     setIsSubmitting(false);
+    setDidSubmit(true);
   };
 
   const cartItems = (
     <ul className={classes['cart-items']}>
+      {console.log(didSubmit)}
       {items.map((item) => (
         <CartItem
           key={item.id}
@@ -45,35 +59,36 @@ const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
           price={item.price}
           onRemove={cartItemRemoveHandler.bind(null, item.id)}
           onAdd={cartItemAddHandler.bind(null, item)}
+          didSubmit={didSubmit}
         />
       ))}
     </ul>
   );
-  const orderBtnToggleHandler = () => {
-    setOrder(!order);
-    console.log(order);
-  };
 
   const cartModalContent = (
-    <div className={classes.content}>
+    <div className={classes.cartContent}>
       <div className={classes.title}> 주 문 서 </div>
       {cartItems}
 
-      <div className={classes.sum}> 합계</div>
-      {total(items)}
-      <button onClick={orderBtnToggleHandler}>주문</button>
+      <div className={classes.sum}>
+        <div> 합계 : {total(items)}원 </div>
+      </div>
+      {/* <button onClick={orderBtnToggleHandler}> 결제 </button> */}
     </div>
   );
 
   const orderModalContent = (
-    <div className={classes.content}>
+    <div className={classes.checkoutContent}>
       <Checkout user={user} onConfirm={submitOrderHandler} onCancel={onClose} />
     </div>
   );
-
+  console.log(items);
+  console.log(userAddress);
   const didSubmitModalContent = (
     <>
-      <p>Successfully send the order!</p>
+      <p>주문완료</p>
+      <div>{rdxAddress}</div>
+      <div>{cartItems}</div>
       <div className={classes.actions}>
         <button className={classes.button} onClick={onClose}>
           Close
@@ -84,8 +99,16 @@ const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
 
   return (
     <Modal onClose={onClose}>
-      {!didSubmit && cartModalContent}
-      {order && orderModalContent}
+      <div className={classes.content}>
+        {!didSubmit && cartModalContent}
+        {items.length == 0 && (
+          <div style={{ color: 'red', fontSize: '2rem', margin: '20px' }}>
+            장바구니가 비어있습니다
+          </div>
+        )}
+        {!didSubmit && items.length > 0 && orderModalContent}
+        {didSubmit && didSubmitModalContent}
+      </div>
     </Modal>
   );
 };
