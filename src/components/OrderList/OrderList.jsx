@@ -38,8 +38,8 @@ const OrderList = ({ onClose, orderedList }) => {
                   <div className={classes.number}>{i + 1}</div>
                   <div className={classes.date}>{dateArr[i]}</div>
                   <div className={classes.items}>
-                    {e.map((innerElement) => (
-                      <li>{innerElement}</li>
+                    {e.map((innerElement, i) => (
+                      <li key={i}>{innerElement}</li>
                     ))}
                   </div>
                   <div className={classes.address}>{addressArr[i]}</div>
