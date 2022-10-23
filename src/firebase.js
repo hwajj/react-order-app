@@ -1,14 +1,23 @@
 import { getApps, initializeApp } from 'firebase/app';
 import 'firebase/compat/firestore';
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
-import 'firebase/compat/firestore';
 import { getDatabase, ref, onValue, child } from 'firebase/database';
-import { REACT_APP_FIREBASE_CONFIG } from './firebaseConfig';
+
+const config = {
+  databaseURL: process.env.REACT_APP_databaseUrl,
+  projectId: process.env.REACT_APP_projectId,
+  apiKey: process.env.REACT_APP_apiKey,
+  authDomain: process.env.REACT_APP_authDomain,
+  storageBucket: process.env.REACT_APP_storageBucket,
+  messagingSenderId: process.env.REACT_APP_messagingSenderId,
+  appId: process.env.REACT_APP_appId,
+  measurementId: process.env.REACT_APP_measurementId,
+};
 
 let app;
 if (getApps().length === 0) {
   // Initialize Firebase
-  app = initializeApp(REACT_APP_FIREBASE_CONFIG);
+  app = initializeApp(config);
 } else {
   // else return what we already have
   app = getApps()[0];
