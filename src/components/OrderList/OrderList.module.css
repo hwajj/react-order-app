@@ -1,0 +1,28 @@
+.orderList button {
+  height: auto;
+  cursor: pointer;
+  font-size: 1.9rem;
+  margin: 14px;
+  padding: 10px;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-size: 2rem;
+  margin: 20px;
+}
+
+.address {
+  font-size: 1.5rem;
+  width: 500px;
+}
+
+.title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 2.6rem;
+  margin: 1rem;
+}
