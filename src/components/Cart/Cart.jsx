@@ -1,9 +1,8 @@
-import React, { useState, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import classes from './Cart.module.css';
 import Modal from '../UI/Modal';
-import Item from '../Menu/Item';
 import CartItem from './CartItem';
 import Checkout from './Checkout';
 
@@ -96,7 +95,7 @@ const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
     <Modal onClose={onClose}>
       <div className={classes.content}>
         {!didSubmit && cartModalContent}
-        {items.length == 0 && (
+        {items.length === 0 && (
           <div style={{ color: 'red', fontSize: '2rem', margin: '20px' }}>
             장바구니가 비어있습니다
           </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { addToCart, removeFromCart } from '../modules/cart';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../modules/cart';
 import Items from '../components/Menu/Items';
 
 const ItemsContainer = (props) => {

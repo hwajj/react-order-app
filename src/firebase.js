@@ -3,14 +3,12 @@ import 'firebase/compat/firestore';
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 import 'firebase/compat/firestore';
 import { getDatabase, ref, onValue, child } from 'firebase/database';
-
-//const firebaseApp = firebase.initializeApp(firebaseConfig);
-//console.log(firebaseApp);
+import { firebaseConfig } from './firebaseConfig';
 
 let app;
 if (getApps().length === 0) {
   // Initialize Firebase
-  app = initializeApp(process.env.REACT_APP_FIREBASE_CONFIG);
+  app = initializeApp(firebaseConfig);
 } else {
   // else return what we already have
   app = getApps()[0];

@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getDatabase, ref, child, get } from 'firebase/database';
 import Items from './components/Menu/Items';

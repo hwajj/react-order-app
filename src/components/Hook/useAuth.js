@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { getAuth, onAuthStateChanged, User } from '@firebase/auth';
-import { logIn } from '../../modules/user';
+import { getAuth, onAuthStateChanged } from '@firebase/auth';
 import { app } from '../../firebase';
 
 const useAuth = () => {

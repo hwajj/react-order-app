@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './Login.module.css';
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { signInWithGoogle, signOutHandler } from '../../firebase';
 import { useAuth } from '../../components/Login/useAuth';
@@ -43,8 +43,8 @@ const Login = (props) => {
       );
 
     // userInfo && auth.createUserWithEmailAndPassword(userInfo.id, userInfo.uid);
-  }, [user_]);
-  const loginFlag = !userInfo || Object.keys(userInfo).length == 0 || !user_;
+  }, [dispatch, user_]);
+  const loginFlag = !userInfo || Object.keys(userInfo).length === 0 || !user_;
   return (
     <div className={classes.loginContainer}>
       {loginFlag && (
@@ -52,7 +52,7 @@ const Login = (props) => {
           <button onClick={loginHandler}>구글로 로그인</button>
         </div>
       )}
-      {userInfo && Object.keys(userInfo).length != 0 && (
+      {userInfo && Object.keys(userInfo).length !== 0 && (
         <div className={classes.userInfo}>
           <h3> {userInfo?.name} 님 반갑습니다</h3>
           <button onClick={(e) => logoutHandler(e)}>로그아웃</button>
