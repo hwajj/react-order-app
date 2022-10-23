@@ -10,7 +10,7 @@ import Cart from './components/Cart/Cart';
 import OrderList from './components/OrderList/OrderList';
 
 function App() {
-  const userInfo = useSelector((state) => state.login?.user);
+  const userInfo = useSelector((state) => state.login.user);
 
   //주문목록
 
@@ -40,7 +40,6 @@ function App() {
   };
 
   //useEffect(() => {}, [userInfo?.uid, orderedList]);
-
   //user 없음 -> 로그인버튼
   //user 있음 -> 로그아웃버튼
 
