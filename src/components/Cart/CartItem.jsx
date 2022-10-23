@@ -2,7 +2,6 @@ import React from 'react';
 import classes from './CartItem.module.css';
 
 const CartItem = ({ name, amount, price, onRemove, onAdd, didSubmit }) => {
-  console.log(didSubmit);
   return (
     <li className={classes['cart-item']}>
       <div className={classes.summary}>

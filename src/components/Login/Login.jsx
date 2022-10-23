@@ -16,13 +16,10 @@ const Login = (props) => {
     signOutHandler(auth);
     dispatch(logOut());
     dispatch(emptyCart());
-    document.getElementById('signInDiv').hidden = false;
+    // document.getElementById('signInDiv').hidden = false;
   }
   const loginHandler = async () => {
-    // console.log(auth);
     const user = await signInWithGoogle(auth);
-    console.log(user);
-    console.log(user.photoURL);
     const userInfo_ = {
       name: user?.displayName,
       id: user?.email,
@@ -31,7 +28,7 @@ const Login = (props) => {
     };
 
     dispatch(logIn(userInfo_));
-    document.getElementById('signInDiv').hidden = true;
+    // document.getElementById('signInDiv').hidden = true;
   };
 
   useEffect(() => {

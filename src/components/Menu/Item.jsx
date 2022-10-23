@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './Item.module.css';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 const Item = ({ name, price, menu, onIncrease, onDecrease }) => {
   const amountInputRef = useRef();
@@ -11,7 +11,6 @@ const Item = ({ name, price, menu, onIncrease, onDecrease }) => {
   const onIncreaseHandler = (event) => {
     event.preventDefault();
     const enteredAmount = amountInputRef.current.value;
-    console.log(enteredAmount);
     onIncrease({
       id: menu.id,
       name: menu.name,

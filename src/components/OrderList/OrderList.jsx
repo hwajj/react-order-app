@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import classes from './OrderList.module.css';
 import Modal from '../UI/Modal';
 
 const OrderList = ({ onClose, orderedList }) => {
-  console.log(orderedList);
   let dateArr_ = Object.values(orderedList)
     .sort((a, b) => (a.date > b.date ? 1 : -1))
     .map((e) => e.date);
@@ -19,7 +18,6 @@ const OrderList = ({ onClose, orderedList }) => {
     .map((e) => e.addressInfo)
     .map((e) => Object.values(e)[0]);
 
-  console.log(addressArr);
   let itemsArr = Object.values(orderedList)
     .map((e) => e.orderedItems)
     .map((e) =>
@@ -27,7 +25,7 @@ const OrderList = ({ onClose, orderedList }) => {
         return `${e.name} x ${e.amount} `;
       })
     );
-  console.log(itemsArr);
+
   return (
     <Modal onClose={onClose}>
       {Object.entries(orderedList).length > 0 && (

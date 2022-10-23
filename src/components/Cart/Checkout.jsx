@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import DaumPostcode from 'react-daum-postcode';
 import classes from './Checkout.module.css';
 import { addAddress } from '../../modules/login';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 const Checkout = (props) => {
   const dispatch = useDispatch();
@@ -41,10 +41,6 @@ const Checkout = (props) => {
 
     // 주소 선택 이벤트
     selectAddress: (data) => {
-      console.log(`
-            주소: ${data.address},
-            우편번호: ${data.zonecode}
-        `);
       setPostalCode(data.zonecode);
       setAddress(data.address);
       setOpenPostcode(false);

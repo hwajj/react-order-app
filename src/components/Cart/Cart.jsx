@@ -8,15 +8,12 @@ import CartItem from './CartItem';
 import Checkout from './Checkout';
 
 const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
-  console.log(user);
-  console.log(items);
-  const [order, setOrder] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  // const [order, setOrder] = useState(false);
+  // const [isSubmitting, setIsSubmitting] = useState(false);
   const [didSubmit, setDidSubmit] = useState(false);
   const [userAddress, setUserAddress] = useState('');
   const rdxAddress = useSelector((state) => state.login.user.address);
 
-  console.log(total(items));
   //주문서 아이템 -1
   const cartItemRemoveHandler = (id) => {
     onDecrease(id);
@@ -29,28 +26,24 @@ const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
   };
 
   const submitOrderHandler = async (userData) => {
-    setIsSubmitting(true);
+    // setIsSubmitting(true);
     setUserAddress(userAddress);
     const today = new Date();
-    const msg = await fetch(
-      process.env.REACT_APP_FIREBASE + `/${user.uid}.json`,
-      {
-        method: 'POST',
-        body: JSON.stringify({
-          addressInfo: userData,
-          orderedItems: items,
-          date: today,
-        }),
-      }
-    );
+    await fetch(process.env.REACT_APP_FIREBASE + `/${user.uid}.json`, {
+      method: 'POST',
+      body: JSON.stringify({
+        addressInfo: userData,
+        orderedItems: items,
+        date: today,
+      }),
+    });
 
-    setIsSubmitting(false);
+    // setIsSubmitting(false);
     setDidSubmit(true);
   };
 
   const cartItems = (
     <ul className={classes['cart-items']}>
-      {console.log(didSubmit)}
       {items.map((item) => (
         <CartItem
           key={item.id}
@@ -82,8 +75,6 @@ const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
       <Checkout user={user} onConfirm={submitOrderHandler} onCancel={onClose} />
     </div>
   );
-  console.log(items);
-  console.log(userAddress);
   const didSubmitModalContent = (
     <div className={classes.orderComplete}>
       <p>주문완료</p>

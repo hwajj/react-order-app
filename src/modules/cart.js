@@ -15,26 +15,9 @@ export const getCartTotal = (items) => {
   return items?.reduce((sum, curr) => sum + curr.amount * curr.price, 0);
 };
 
-// export const getBasketMap = (cart) =>
-//   cart?.reduce((array, item) => {
-//     let x = array.find((e) => e.id === item.id);
-//     //없으면 amount 1 로 줌
-//     if (!x) {
-//       item['amount'] = 1;
-//       array = array.concat(item);
-
-//       //있으면 amount 개수 증가
-//     } else {
-//       x['amount']++;
-//     }
-
-//     return array;
-//   }, []);
-
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_CART:
-      console.log(action);
       //    return;
       const ItemIdx = state.items.findIndex(
         (item) => item.id === action.item.id
@@ -52,7 +35,6 @@ const cartReducer = (state = initialState, action) => {
       } else {
         updatedItemArr = state.items.concat(action.item);
       }
-      console.log(updatedItemArr);
       return {
         ...state,
         items: [...updatedItemArr],

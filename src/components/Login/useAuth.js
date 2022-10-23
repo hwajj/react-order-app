@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { getAuth, onAuthStateChanged, User } from '@firebase/auth';
-import { logIn } from '../../modules/login';
+import { getAuth, onAuthStateChanged } from '@firebase/auth';
 import { app } from '../../firebase';
 
 const useAuth = () => {
@@ -14,7 +13,6 @@ const useAuth = () => {
   useEffect(() => {
     mounted.current = true;
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      console.log('onAuthUserChanged', user);
       if (user) {
         if (mounted.current) {
           setUser(user);
