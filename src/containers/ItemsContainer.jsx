@@ -5,7 +5,7 @@ import { addToCart, removeFromCart } from '../modules/cart';
 import Items from '../components/Menu/Items';
 
 const ItemsContainer = (props) => {
-  const items = useSelector((state) => state.items);
+  //  const items = useSelector((state) => state.items);
   const dispatch = useDispatch();
   const onIncrease = useCallback(
     (item) => {
@@ -14,10 +14,10 @@ const ItemsContainer = (props) => {
     },
     [dispatch]
   );
-  const onDecrease = useCallback(
-    (id) => dispatch(removeFromCart(id)),
-    [dispatch]
-  );
+  // const onDecrease = useCallback(
+  //   (id) => dispatch(removeFromCart(id)),
+  //   [dispatch]
+  // );
 
   return <Items onIncrease={onIncrease} />;
 };

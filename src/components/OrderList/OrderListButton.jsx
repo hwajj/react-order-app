@@ -1,8 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 
 import classes from './OrderList.module.css';
-import { getDatabase, ref, child, get } from 'firebase/database';
-import { useSelector, useDispatch } from 'react-redux';
 
 const OrderListButton = ({ onShowOrderList, onLoadOrderList }) => {
   const orderListHandler = () => {

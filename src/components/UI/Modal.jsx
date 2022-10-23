@@ -14,7 +14,6 @@ const ModalOverlay = (props) => {
   );
 };
 
-//어디로 포털할지
 const portalElement = document.getElementById('overlays');
 
 const Modal = (props) => {
