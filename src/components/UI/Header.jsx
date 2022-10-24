@@ -13,7 +13,8 @@ const Header = ({ onShowCart, onShowOrderList, onLoadOrderList }) => {
           <Login />
         </div>
         <div className={classes.title}>
-          <h1> 시스터즈 샌드위치</h1>
+          <h1> 시스터즈&nbsp;</h1>
+          <h1> 샌드위치&nbsp;</h1>
         </div>
         <div className={classes.buttonContainer}>
           <OrderListButton

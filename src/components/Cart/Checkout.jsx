@@ -13,14 +13,14 @@ const Checkout = (props) => {
   const nameInputRef = useRef();
   const postalCodeInputRef = useRef();
   const addressInputRef = useRef();
-  const addressInputRef2 = useRef();
+  const addressDetailInputRef = useRef();
 
   const confirmHandler = (event) => {
     event.preventDefault();
     const enteredName = nameInputRef.current.value;
     const enteredAddress = addressInputRef.current.value;
     const enteredPostalCode = postalCodeInputRef.current.value;
-    const enteredAddress2 = addressInputRef2.current.value;
+    const enteredAddress2 = addressDetailInputRef.current.value;
     setAddress(enteredAddress);
     setAddressSecond(enteredAddress2);
     setPostalCode(enteredPostalCode);
@@ -46,24 +46,24 @@ const Checkout = (props) => {
       setOpenPostcode(false);
     },
   };
-
   const addressInputCheck = () => {
-    setAddressSecond(addressInputRef2.current.value);
+    setAddressSecond(addressDetailInputRef.current.value);
   };
 
   return (
     <form className={classes.form} onSubmit={confirmHandler}>
       <div className={classes.info}>
-        <div>
+        <div className={classes.name}>
           <label htmlFor='name'>이름 </label>
           <input
             type='text'
             id='name'
             defaultValue={props.user.name}
             ref={nameInputRef}
+            placeholder='이름을 입력해주세요'
           />
         </div>
-        <div>
+        <div className={classes.address}>
           <label htmlFor='address'>주소 </label>
           <input
             type='text'
@@ -71,15 +71,11 @@ const Checkout = (props) => {
             ref={addressInputRef}
             value={address || ''}
             readOnly
+            placeholder='주소 검색 클릭'
           />
 
           <button
             type='text'
-            style={
-              address
-                ? { backgroundColor: 'buttonface' }
-                : { backgroundColor: 'black', color: 'white' }
-            }
             className={classes.addressSearch}
             onClick={handle.clickButton}
           >
@@ -87,31 +83,28 @@ const Checkout = (props) => {
           </button>
         </div>
 
-        <div className={classes.address2}>
-          <label htmlFor='address2'>주소</label>
+        <div className={classes.addressDetail}>
+          <label htmlFor='addressDetail'>주소</label>
           <input
             type='text'
-            id='address2'
-            ref={addressInputRef2}
+            id='addressDetail'
+            ref={addressDetailInputRef}
             onBlur={addressInputCheck}
+            placeholder='나머지 주소를 입력해주세요'
           />
-
           <div
             type='text'
             style={
               addressSecond.length > 0
                 ? { visibility: 'hidden' }
-                : { visibility: 'visible' }
+                : { visibility: 'visible', color: 'red' }
             }
-          >
-            나머지 주소를 입력해주세요
-          </div>
+          ></div>
         </div>
 
-        <div>
+        <div className={classes.postalCode}>
           <label htmlFor='postalCode'>우편번호 </label>
           <input
-            style={{ width: '100px' }}
             type='text'
             id='postalCode'
             ref={postalCodeInputRef}

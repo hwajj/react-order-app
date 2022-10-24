@@ -92,6 +92,7 @@ input:focus {
   margin-bottom: 19px;
   border: 1px solid grey;
   border-radius: 2px;
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {

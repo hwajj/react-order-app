@@ -12,6 +12,7 @@
   padding: 10px;
   margin: 10px;
   z-index: 100;
+  cursor: pointer;
 }
 
 svg {
@@ -20,9 +21,6 @@ svg {
 }
 
 @media (max-width: 768px) {
-  .cartBtnContainer button {
-    width: 50px;
-  }
   svg {
     width: 20px;
     padding: 0;

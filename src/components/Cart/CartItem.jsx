@@ -9,7 +9,7 @@ const CartItem = ({ name, amount, price, onRemove, onAdd, didSubmit }) => {
         <span className={classes.price}>{price}원</span>
       </div>
 
-      <div style={{ width: '21%' }} className={classes.actions}>
+      <div className={classes.actions}>
         {!didSubmit && <button onClick={onRemove}>−</button>}
         <span className={classes.amount}>{amount}</span>
         {!didSubmit && <button onClick={onAdd}>+</button>}

@@ -1,15 +1,16 @@
 .loginContainer button {
   margin: 2rem 1rem;
-  font-size: 0.5rem;
+  font-size: 0.9rem;
   padding: 5px;
+  cursor: pointer;
 }
 
 .userInfo button {
   margin: 0 1rem;
-  font-size: 0.5rem;
   padding: 5px;
+  cursor: pointer;
 }
 
 .userInfo span {
-  font-size: 0.5rem;
+  font-size: 0.9rem;
 }

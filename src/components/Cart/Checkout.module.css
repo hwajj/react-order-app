@@ -5,17 +5,36 @@
   margin: 30px;
 }
 
-.info div {
+.name,
+.postalCode {
   margin: 2px;
-  display: table-cell;
-  vertical-align: middle;
-  height: 50px;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
 }
 
-.info input {
-  width: 383px;
+.address,
+.addressDetail {
+  margin: 2px;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+}
+.addressDetailAlert {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  font-size: 1rem;
+}
+.addressDetail div {
+  font-size: 1rem;
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.postalCode input,
+.name input {
   font-size: 1.2rem;
   line-height: 1.4;
+  width: 100px;
 }
 
 .info div:nth-child(3) > label {
@@ -39,7 +58,7 @@
   background: rgba(0, 0, 0, 0.25);
   top: 30%;
   height: 100%;
-  width: 600px;
+  width: 70%;
   margin: auto;
 }
 
@@ -50,11 +69,13 @@
 }
 
 .info button {
-  margin: 20px;
-  border: 1px;
+  margin: 0 20px;
+  border: 1px solid black;
   padding: 5px;
   border-radius: 2px;
+  cursor: pointer;
 }
+
 .submit {
   margin: auto;
   width: 100px;
@@ -64,4 +85,47 @@
   padding: 5px;
   width: 100px;
   font-size: 1.2rem;
+  cursor: pointer;
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .info {
+    font-size: 1rem;
+  }
+
+  .info button {
+    margin: 0px;
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+
+  .info input {
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+
+  .info button {
+    font-size: 0.7rem;
+    margin: 0 5px;
+  }
+  .name,
+  .postalCode {
+    margin: 2px;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+  }
+
+  .address,
+  .addressDetail {
+    margin: 2px;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+  }
+
+  .info label {
+    width: 60px;
+  }
 }
