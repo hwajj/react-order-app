@@ -5,7 +5,7 @@ import classes from './Header.module.css';
 import Login from '../Login/Login';
 import OrderListButton from '../OrderList/OrderListButton';
 
-const Header = ({ onShowCart, onShowOrderList, onLoadOrderList }) => {
+const Header = ({ onShowCart, onShowOrderList, onLoadOrderList, userInfo }) => {
   return (
     <>
       <header className={classes.header}>
@@ -17,10 +17,12 @@ const Header = ({ onShowCart, onShowOrderList, onLoadOrderList }) => {
           <h1> 샌드위치&nbsp;</h1>
         </div>
         <div className={classes.buttonContainer}>
-          <OrderListButton
-            onShowOrderList={onShowOrderList}
-            onLoadOrderList={onLoadOrderList}
-          />
+          {userInfo && (
+            <OrderListButton
+              onShowOrderList={onShowOrderList}
+              onLoadOrderList={onLoadOrderList}
+            />
+          )}
           <HeaderCartButton onShowCart={onShowCart} />
         </div>
       </header>

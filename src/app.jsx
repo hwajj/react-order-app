@@ -11,7 +11,6 @@ import OrderList from './components/OrderList/OrderList';
 
 function App() {
   const userInfo = useSelector((state) => state.login.user);
-
   //주문목록
 
   const [orderedList, setOrderedList] = useState([]);
@@ -82,9 +81,14 @@ function App() {
       )}
 
       {orderListIsShown && (
-        <OrderList orderedList={orderedList} onClose={hideOrderListHandler} />
+        <OrderList
+          userInfo={userInfo}
+          orderedList={orderedList}
+          onClose={hideOrderListHandler}
+        />
       )}
       <Header
+        userInfo={userInfo}
         onShowCart={showCartHandler}
         onShowOrderList={showOrderListHandler}
         onLoadOrderList={loadOrderList}
