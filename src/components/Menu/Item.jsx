@@ -39,7 +39,7 @@ const Item = ({ name, price, menu, onIncrease, onDecrease }) => {
               defaultValue='1'
               ref={amountInputRef}
             ></input>
-            <button onClick={onIncreaseHandler}> Add</button>
+            <button onClick={onIncreaseHandler}> + </button>
           </div>
         </form>
       </div>
