@@ -8,12 +8,7 @@ const OrderList = ({ onClose, orderedList }) => {
     .map((e) => e.date);
   let dateArr = [];
   dateArr_.map((e) => dateArr.push(new Date(e)));
-  dateArr = dateArr.map(
-    (e) =>
-      `${e.getFullYear()}-${e.getMonth() + 1}-${
-        e.getDate() + 1
-      } ${e.getHours()} : ${e.getMinutes()}`
-  );
+  dateArr = dateArr.map((e) => e.toISOString().substr(0, 16).replace('T', ' '));
   let addressArr = Object.values(orderedList)
     .map((e) => e.addressInfo)
     .map((e) => Object.values(e)[0]);
