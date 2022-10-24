@@ -17,7 +17,7 @@ const Header = ({ onShowCart, onShowOrderList, onLoadOrderList, userInfo }) => {
           <h1> 샌드위치&nbsp;</h1>
         </div>
         <div className={classes.buttonContainer}>
-          {userInfo && (
+          {userInfo && Object.values(userInfo).length > 0 && (
             <OrderListButton
               onShowOrderList={onShowOrderList}
               onLoadOrderList={onLoadOrderList}

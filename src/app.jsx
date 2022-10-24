@@ -11,8 +11,8 @@ import OrderList from './components/OrderList/OrderList';
 
 function App() {
   const userInfo = useSelector((state) => state.login.user);
-  //주문목록
 
+  //주문목록
   const [orderedList, setOrderedList] = useState([]);
   const [orderListIsShown, setOrderListIsShown] = useState(false);
   const showOrderListHandler = () => {
@@ -38,7 +38,6 @@ function App() {
       });
   };
 
-  //useEffect(() => {}, [userInfo?.uid, orderedList]);
   //user 없음 -> 로그인버튼
   //user 있음 -> 로그아웃버튼
 
@@ -81,11 +80,7 @@ function App() {
       )}
 
       {orderListIsShown && (
-        <OrderList
-          userInfo={userInfo}
-          orderedList={orderedList}
-          onClose={hideOrderListHandler}
-        />
+        <OrderList orderedList={orderedList} onClose={hideOrderListHandler} />
       )}
       <Header
         userInfo={userInfo}
