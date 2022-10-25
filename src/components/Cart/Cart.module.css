@@ -14,6 +14,11 @@
   font-size: 2rem;
 }
 
+.title {
+  font-size: 3rem;
+  margin: 1rem;
+}
+
 .checkoutContent {
   display: flex;
   flex-direction: column;
@@ -32,22 +37,23 @@
 
 .orderComplete p {
   font-size: 3rem;
+  margin: 3rem;
 }
 
 .orderComplete .address {
   font-size: 1.4rem;
-  margin: 3rem;
+  margin: 35px;
 }
 .price {
-  margin-top: 1rem;
-  margin-bottom: 3rem;
+  margin-left: 7rem;
 }
 
-.orderComplete hr {
+.orderComplete hr,
+.cartContent hr {
   border: 0;
   clear: both;
   display: block;
-  width: 40%;
+  width: 60%;
   background-color: grey;
   height: 1px;
   margin: 10px;
@@ -58,7 +64,7 @@
   color: white;
   font-size: 3rem;
   display: block;
-  width: 500px;
+  width: auto;
   margin: auto;
   text-align: center;
 }

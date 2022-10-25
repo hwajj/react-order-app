@@ -9,7 +9,6 @@ const ItemsContainer = (props) => {
   const dispatch = useDispatch();
   const onIncrease = useCallback(
     (item) => {
-      console.log(item);
       return dispatch(addToCart(item));
     },
     [dispatch]

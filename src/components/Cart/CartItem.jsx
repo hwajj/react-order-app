@@ -11,6 +11,7 @@ const CartItem = ({ name, amount, price, onRemove, onAdd, didSubmit }) => {
 
       <div className={classes.actions}>
         {!didSubmit && <button onClick={onRemove}>−</button>}
+        {didSubmit && <div>x</div>}
         <span className={classes.amount}>{amount}</span>
         {!didSubmit && <button onClick={onAdd}>+</button>}
       </div>

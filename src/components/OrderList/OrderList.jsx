@@ -7,8 +7,11 @@ const OrderList = ({ onClose, orderedList }) => {
     .sort((a, b) => (a.date > b.date ? 1 : -1))
     .map((e) => e.date);
   let dateArr = [];
+  let dayArr = [];
+  let timeArr = [];
   dateArr_.map((e) => dateArr.push(new Date(e)));
-  dateArr = dateArr.map((e) => e.toISOString().substr(0, 16).replace('T', ' '));
+  dayArr = dateArr.map((e) => e.toLocaleString().substr(0, 13));
+  timeArr = dateArr.map((e) => e.toLocaleString().substr(14));
   let addressArr = Object.values(orderedList)
     .map((e) => e.addressInfo)
     .map((e) => Object.values(e)[0]);
@@ -31,7 +34,10 @@ const OrderList = ({ onClose, orderedList }) => {
               return (
                 <div key={i} className={classes.content}>
                   <div className={classes.number}>{i + 1}</div>
-                  <div className={classes.date}>{dateArr[i]}</div>
+                  <div className={classes.date}>
+                    <div>{dayArr[i]}</div>
+                    <div>{timeArr[i]}</div>
+                  </div>
                   <div className={classes.items}>
                     {e.map((innerElement, i) => (
                       <li key={i}>{innerElement}</li>

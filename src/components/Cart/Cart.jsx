@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
 import classes from './Cart.module.css';
@@ -12,6 +12,23 @@ const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
   const [didSubmit, setDidSubmit] = useState(false);
   const [userAddress, setUserAddress] = useState('');
   const rdxAddress = useSelector((state) => state.login.user.address);
+  const orderCompleteTitleRef = useRef();
+  const orderTitleRef = useRef();
+  const contentRef = useRef();
+  const closeRef = useRef();
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+
+    contentScrollByTimeOut(orderCompleteTitleRef);
+    contentScrollByTimeOut(closeRef, 1000);
+    //setTimeout();
+  }, [didSubmit]);
+
+  const contentScrollByTimeOut = (dom, sec = 0) => {
+    setTimeout(() => {
+      dom.current?.scrollIntoView({ behavior: 'smooth' });
+    }, sec);
+  };
 
   //주문서 아이템 -1
   const cartItemRemoveHandler = (id) => {
@@ -37,7 +54,6 @@ const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
       }),
     });
 
-    // setIsSubmitting(false);
     setDidSubmit(true);
   };
 
@@ -58,10 +74,10 @@ const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
   );
 
   const cartModalContent = (
-    <div className={classes.cartContent}>
+    <div className={classes.cartContent} ref={orderTitleRef}>
       <div className={classes.title}> 주 문 서 </div>
       {cartItems}
-
+      <hr />
       <div className={classes.sum}>
         <div> 합계 : {total(items)}원 </div>
       </div>
@@ -71,11 +87,16 @@ const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
 
   const orderModalContent = (
     <div className={classes.checkoutContent}>
-      <Checkout user={user} onConfirm={submitOrderHandler} onCancel={onClose} />
+      <Checkout
+        onScroll={contentScrollByTimeOut}
+        user={user}
+        onConfirm={submitOrderHandler}
+        onCancel={onClose}
+      />
     </div>
   );
   const didSubmitModalContent = (
-    <div className={classes.orderComplete}>
+    <div className={classes.orderComplete} ref={orderCompleteTitleRef}>
       <p>주문완료</p>
 
       <div>{cartItems}</div>
@@ -84,7 +105,7 @@ const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
       <div className={classes.address}> {rdxAddress}</div>
       <div className={classes.message}> 감사합니다 ! </div>
       <div>
-        <button className={classes.button} onClick={onClose}>
+        <button className={classes.button} onClick={onClose} ref={closeRef}>
           닫기
         </button>
       </div>
@@ -93,7 +114,7 @@ const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
 
   return (
     <Modal onClose={onClose}>
-      <div className={classes.content}>
+      <div className={classes.content} ref={contentRef}>
         {!didSubmit && cartModalContent}
         {items.length === 0 && (
           <div style={{ color: 'red', fontSize: '2rem', margin: '20px' }}>

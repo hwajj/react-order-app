@@ -1,10 +1,10 @@
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import DaumPostcode from 'react-daum-postcode';
 import classes from './Checkout.module.css';
 import { addAddress } from '../../modules/login';
 import { useDispatch } from 'react-redux';
 
-const Checkout = (props) => {
+const Checkout = ({ onScroll, onConfirm, user, onCancel }) => {
   const dispatch = useDispatch();
   const [openPostcode, setOpenPostcode] = useState(false);
   const [address, setAddress] = useState('');
@@ -14,6 +14,17 @@ const Checkout = (props) => {
   const postalCodeInputRef = useRef();
   const addressInputRef = useRef();
   const addressDetailInputRef = useRef();
+  const submitRef = useRef();
+  const postcodeSearchRef = useRef();
+
+  useEffect(() => {
+    // 주문선택 클릭하면 주소 선택 창 보이게 함
+    onScroll(postcodeSearchRef, 100);
+    // 나머지 주소 입력시 결제버튼이 보이도록 함
+    onScroll(submitRef, 1000);
+    //주문서창 뜨면 부드럽게 아래로 내려가게 함
+    onScroll(postalCodeInputRef);
+  }, [openPostcode, addressSecond, onScroll]);
 
   const confirmHandler = (event) => {
     event.preventDefault();
@@ -25,7 +36,7 @@ const Checkout = (props) => {
     setAddressSecond(enteredAddress2);
     setPostalCode(enteredPostalCode);
     dispatch(addAddress(`${address} ${addressSecond} (${postalCode})`));
-    props.onConfirm({
+    onConfirm({
       name: enteredName,
       Address: address + ' ' + addressSecond,
       postalCode: postalCode,
@@ -36,7 +47,7 @@ const Checkout = (props) => {
     // 버튼 클릭 이벤트
     clickButton: (event) => {
       event.preventDefault();
-      setOpenPostcode((current) => !current);
+      setOpenPostcode(true);
     },
 
     // 주소 선택 이벤트
@@ -46,7 +57,7 @@ const Checkout = (props) => {
       setOpenPostcode(false);
     },
   };
-  const addressInputCheck = () => {
+  const setAddressDetailValue = () => {
     setAddressSecond(addressDetailInputRef.current.value);
   };
 
@@ -58,7 +69,7 @@ const Checkout = (props) => {
           <input
             type='text'
             id='name'
-            defaultValue={props.user.name}
+            defaultValue={user.name}
             ref={nameInputRef}
             placeholder='이름을 입력해주세요'
           />
@@ -89,8 +100,9 @@ const Checkout = (props) => {
             type='text'
             id='addressDetail'
             ref={addressDetailInputRef}
-            onBlur={addressInputCheck}
+            onChange={setAddressDetailValue}
             placeholder='나머지 주소를 입력해주세요'
+            onBlur={() => submitRef.current?.focus()}
           />
           <div
             type='text'
@@ -102,18 +114,17 @@ const Checkout = (props) => {
           ></div>
         </div>
 
-        <div className={classes.postalCode}>
+        <div className={classes.postalCode} ref={postalCodeInputRef}>
           <label htmlFor='postalCode'>우편번호 </label>
           <input
             type='text'
             id='postalCode'
-            ref={postalCodeInputRef}
             value={postalCode || ''}
             readOnly
           />
         </div>
       </div>
-      <div>
+      <div ref={postcodeSearchRef}>
         {openPostcode && (
           <div className={classes.postModal}>
             <DaumPostcode
@@ -126,7 +137,11 @@ const Checkout = (props) => {
       </div>
 
       <div className={classes.submit}>
-        {address && addressSecond && <button type='submit'>결제</button>}
+        {address && addressSecond && (
+          <button type='submit' ref={submitRef}>
+            결제
+          </button>
+        )}
       </div>
     </form>
   );

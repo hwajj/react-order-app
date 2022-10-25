@@ -5,6 +5,7 @@ h2 {
 .cart-item {
   display: grid;
   grid-template-columns: 5fr 2fr;
+  margin: 10px;
 }
 
 .summary {
@@ -28,6 +29,9 @@ h2 {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+.actions div {
+  margin-bottom: 2px;
 }
 
 .actions span {
