@@ -29,4 +29,4 @@ const Header = ({ onShowCart, onShowOrderList, onLoadOrderList, userInfo }) => {
     </>
   );
 };
-export default Header;
+export default React.memo(Header);

@@ -14,4 +14,4 @@ const CartIcon = (props) => (
   </svg>
 );
 
-export default CartIcon;
+export default React.memo(CartIcon);

@@ -20,4 +20,4 @@ const Items = ({ items, onIncrease }) => {
   );
 };
 
-export default Items;
+export default React.memo(Items);
