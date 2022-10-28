@@ -83,6 +83,9 @@
 }
 
 @media (max-width: 900px) {
+  .title {
+    font-size: 2rem;
+  }
   .cartContent {
     font-size: 1.6rem;
   }

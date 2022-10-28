@@ -1,21 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
-
+import { useSelector, useDispatch } from 'react-redux';
 import classes from './Cart.module.css';
 import Modal from '../UI/Modal';
 import CartItem from './CartItem';
 import Checkout from './Checkout';
+import { emptyCart } from '../../modules/cart';
 
 const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
   // const [order, setOrder] = useState(false);
   // const [isSubmitting, setIsSubmitting] = useState(false);
+  const dispatch = useDispatch();
   const [didSubmit, setDidSubmit] = useState(false);
   const [userAddress, setUserAddress] = useState('');
-  const rdxAddress = useSelector((state) => state.login.user.address);
+  const rdxAddress = useSelector((state) => state.login.user?.address);
   const orderCompleteTitleRef = useRef();
   const orderTitleRef = useRef();
   const contentRef = useRef();
   const closeRef = useRef();
+  const [orderCompleteOn, setOrderCompleteOn] = useState(true);
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 
@@ -55,6 +57,7 @@ const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
     });
 
     setDidSubmit(true);
+    setOrderCompleteOn(true);
   };
 
   const onChangeValue = (item, event) => {
@@ -68,9 +71,24 @@ const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
     }
     onIncrease(newItem);
   };
+
+  const onCloseEmptyCart = () => {
+    onClose();
+
+    //결제시 장바구니 비우기
+    didSubmit && dispatch(emptyCart());
+
+    //주문완료페이지flag False로 하기
+    setOrderCompleteOn(false);
+  };
+
   const cartItems = (
     <>
-      <div className={classes.maxItemMsg}>품목 당 최대 20개 주문가능합니다</div>
+      {!didSubmit && !orderCompleteOn && (
+        <div className={classes.maxItemMsg}>
+          품목 당 최대 20개 주문가능합니다
+        </div>
+      )}
       <ul className={classes['cart-items']}>
         {items.map((item) => (
           <CartItem
@@ -121,7 +139,11 @@ const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
       <div className={classes.address}> {rdxAddress}</div>
       <div className={classes.message}> 감사합니다 ! </div>
       <div>
-        <button className={classes.button} onClick={onClose} ref={closeRef}>
+        <button
+          className={classes.button}
+          onClick={onCloseEmptyCart}
+          ref={closeRef}
+        >
           닫기
         </button>
       </div>
@@ -129,7 +151,7 @@ const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
   );
 
   return (
-    <Modal onClose={onClose}>
+    <Modal onClose={onCloseEmptyCart}>
       <div className={classes.content} ref={contentRef}>
         {!didSubmit && cartModalContent}
         {items.length === 0 && (
