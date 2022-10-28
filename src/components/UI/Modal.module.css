@@ -28,6 +28,6 @@
 
 @media (max-width: 768px) {
   .modal {
-    height: 700px;
+    height: fit-content;
   }
 }
