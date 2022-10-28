@@ -18,6 +18,9 @@
   font-size: 3rem;
   margin: 1rem;
 }
+.maxItemMsg {
+  font-size: 10px;
+}
 
 .checkoutContent {
   display: flex;

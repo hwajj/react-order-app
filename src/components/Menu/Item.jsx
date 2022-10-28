@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './Item.module.css';
-import { useRef } from 'react';
+import { useRef, useCallback } from 'react';
 
 const Item = ({ name, price, menu, onIncrease, onDecrease }) => {
   const amountInputRef = useRef();
@@ -8,16 +8,19 @@ const Item = ({ name, price, menu, onIncrease, onDecrease }) => {
     event.preventDefault();
   };
 
-  const onIncreaseHandler = (event) => {
-    event.preventDefault();
-    const enteredAmount = amountInputRef.current.value;
-    onIncrease({
-      id: menu.id,
-      name: menu.name,
-      amount: +enteredAmount,
-      price: menu.price,
-    });
-  };
+  const onIncreaseHandler = useCallback(
+    (event) => {
+      event.preventDefault();
+      const enteredAmount = amountInputRef.current.value;
+      onIncrease({
+        id: menu.id,
+        name: menu.name,
+        amount: +enteredAmount,
+        price: menu.price,
+      });
+    },
+    [menu.id, menu.name, menu.price, onIncrease]
+  );
   return (
     <li className={classes.content}>
       <div className={classes.photo}>
@@ -47,4 +50,4 @@ const Item = ({ name, price, menu, onIncrease, onDecrease }) => {
   );
 };
 
-export default Item;
+export default React.memo(Item);

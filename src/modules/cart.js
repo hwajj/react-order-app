@@ -7,6 +7,7 @@ const EMPTY_CART = 'cart/EMPTY';
 export const addToCart = (item) => ({ type: ADD_TO_CART, item });
 export const removeFromCart = (id) => ({ type: REMOVE_FROM_CART, id });
 export const emptyCart = () => ({ type: EMPTY_CART });
+
 const initialState = {
   items: [],
 };
@@ -18,7 +19,6 @@ export const getCartTotal = (items) => {
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_CART:
-      //    return;
       const ItemIdx = state.items.findIndex(
         (item) => item.id === action.item.id
       );
@@ -29,7 +29,7 @@ const cartReducer = (state = initialState, action) => {
       if (ItemIdx >= 0) {
         const upDatedItem = {
           ...existingItem,
-          amount: existingItem.amount + action.item.amount,
+          amount: Number(existingItem.amount) + Number(action.item.amount),
         };
         updatedItemArr[ItemIdx] = upDatedItem;
       } else {

@@ -57,25 +57,41 @@ const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
     setDidSubmit(true);
   };
 
+  const onChangeValue = (item, event) => {
+    const newItem = Object.assign({}, item);
+    //   console.log(type event.target.value)
+    const amount = Number(event.target.value);
+    if (amount <= 20) {
+      newItem.amount = event.target.value - item.amount;
+    } else {
+      newItem.amount = 20 - item.amount;
+    }
+    onIncrease(newItem);
+  };
   const cartItems = (
-    <ul className={classes['cart-items']}>
-      {items.map((item) => (
-        <CartItem
-          key={item.id}
-          name={item.name}
-          amount={item.amount}
-          price={item.price}
-          onRemove={cartItemRemoveHandler.bind(null, item.id)}
-          onAdd={cartItemAddHandler.bind(null, item)}
-          didSubmit={didSubmit}
-        />
-      ))}
-    </ul>
+    <>
+      <div className={classes.maxItemMsg}>품목 당 최대 20개 주문가능합니다</div>
+      <ul className={classes['cart-items']}>
+        {items.map((item) => (
+          <CartItem
+            key={item.id}
+            name={item.name}
+            amount={item.amount}
+            price={item.price}
+            onRemove={cartItemRemoveHandler.bind(null, item.id)}
+            onAdd={cartItemAddHandler.bind(null, item)}
+            didSubmit={didSubmit}
+            onChangeValue={onChangeValue.bind(null, item)}
+          />
+        ))}
+      </ul>
+    </>
   );
 
   const cartModalContent = (
     <div className={classes.cartContent} ref={orderTitleRef}>
       <div className={classes.title}> 주 문 서 </div>
+
       {cartItems}
       <hr />
       <div className={classes.sum}>
