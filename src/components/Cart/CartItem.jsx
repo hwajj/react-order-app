@@ -28,7 +28,6 @@ const CartItem = ({
               min='1'
               type='number'
               onChange={(e) => onChangeValue(e)}
-              defaultValue={amount}
               value={amount}
             />
           )}
