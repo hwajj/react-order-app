@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './Item.module.css';
-import { useRef, useCallback } from 'react';
+import { useRef } from 'react';
 
 const Item = ({ name, price, menu, onIncrease, onDecrease }) => {
   const amountInputRef = useRef();
@@ -8,19 +8,22 @@ const Item = ({ name, price, menu, onIncrease, onDecrease }) => {
     event.preventDefault();
   };
 
-  const onIncreaseHandler = useCallback(
-    (event) => {
-      event.preventDefault();
-      const enteredAmount = amountInputRef.current.value;
-      onIncrease({
-        id: menu.id,
-        name: menu.name,
-        amount: +enteredAmount,
-        price: menu.price,
-      });
-    },
-    [menu.id, menu.name, menu.price, onIncrease]
-  );
+  const onIncreaseHandler = (event) => {
+    event.preventDefault();
+    //   const amount = Number(amountInputRef.target.value);
+    if (amountInputRef.current.value > 20) {
+      amountInputRef.current.value = 20;
+    }
+    const enteredAmount = amountInputRef.current.value;
+
+    onIncrease({
+      id: menu.id,
+      name: menu.name,
+      amount: +enteredAmount,
+      price: menu.price,
+    });
+  };
+
   return (
     <li className={classes.content}>
       <div className={classes.photo}>

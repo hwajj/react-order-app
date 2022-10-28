@@ -17,7 +17,6 @@ const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
   const orderTitleRef = useRef();
   const contentRef = useRef();
   const closeRef = useRef();
-  const [orderCompleteOn, setOrderCompleteOn] = useState(true);
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 
@@ -57,7 +56,6 @@ const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
     });
 
     setDidSubmit(true);
-    setOrderCompleteOn(true);
   };
 
   const onChangeValue = (item, event) => {
@@ -77,18 +75,10 @@ const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
 
     //결제시 장바구니 비우기
     didSubmit && dispatch(emptyCart());
-
-    //주문완료페이지flag False로 하기
-    setOrderCompleteOn(false);
   };
 
   const cartItems = (
     <>
-      {!didSubmit && !orderCompleteOn && (
-        <div className={classes.maxItemMsg}>
-          품목 당 최대 20개 주문가능합니다
-        </div>
-      )}
       <ul className={classes['cart-items']}>
         {items.map((item) => (
           <CartItem
@@ -109,7 +99,11 @@ const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
   const cartModalContent = (
     <div className={classes.cartContent} ref={orderTitleRef}>
       <div className={classes.title}> 주 문 서 </div>
-
+      {!didSubmit && (
+        <div className={classes.maxItemMsg}>
+          품목 당 최대 20개 주문가능합니다
+        </div>
+      )}
       {cartItems}
       <hr />
       <div className={classes.sum}>

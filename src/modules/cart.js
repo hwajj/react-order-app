@@ -22,14 +22,15 @@ const cartReducer = (state = initialState, action) => {
       const ItemIdx = state.items.findIndex(
         (item) => item.id === action.item.id
       );
-
-      const existingItem = state.items[ItemIdx];
       let updatedItemArr = [...state.items];
-
       if (ItemIdx >= 0) {
+        const existingItem = state.items[ItemIdx];
+        let maxAmount =
+          Number(existingItem.amount) + Number(action.item.amount);
+        if (maxAmount > 20) maxAmount = 20;
         const upDatedItem = {
           ...existingItem,
-          amount: Number(existingItem.amount) + Number(action.item.amount),
+          amount: maxAmount,
         };
         updatedItemArr[ItemIdx] = upDatedItem;
       } else {
