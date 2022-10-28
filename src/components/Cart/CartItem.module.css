@@ -5,7 +5,7 @@ h2 {
 .cart-item {
   display: grid;
   grid-template-columns: 5fr 2fr;
-  margin: 10px;
+  margin: 0 2rem;
 }
 
 .summary {
@@ -61,6 +61,10 @@ h2 {
   font-size: 10px;
 }
 
+.hrContainer {
+  display: flex;
+}
+
 @media (max-width: 768px) {
   .summary h2 {
     width: 100px;
@@ -74,7 +78,7 @@ h2 {
     font-size: 1rem;
   }
   .actions {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
   .actions button {
     font-size: 1rem;

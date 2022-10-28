@@ -20,6 +20,7 @@
   font-size: 10px;
   display: flex;
   justify-content: flex-end;
+  margin: 0 2rem;
 }
 
 .checkoutContent {
@@ -41,7 +42,7 @@
 
 .orderComplete p {
   font-size: 3rem;
-  margin: 3rem;
+  margin: 1rem auto;
 }
 
 .orderComplete .address {
@@ -52,7 +53,19 @@
   margin-left: 7rem;
 }
 
-.orderComplete hr,
+.orderComplete hr {
+  border: 0;
+  clear: both;
+  display: block;
+  width: 80%;
+  background-color: grey;
+  height: 1px;
+  margin: 10px;
+}
+
+.hrContainer {
+  display: flex;
+}
 .cartContent hr {
   border: 0;
   clear: both;
@@ -60,13 +73,13 @@
   width: 100%;
   background-color: grey;
   height: 1px;
-  margin: 10px;
+  margin: 1rem 2rem 1rem 3rem;
 }
 
 .orderComplete .message {
   background-color: grey;
   color: white;
-  font-size: 3rem;
+  font-size: 1.2rem;
   display: block;
   width: auto;
   margin: auto;
@@ -77,7 +90,7 @@
   padding: 10px;
   width: 200px;
   margin: 2rem;
-  font-size: 2rem;
+  font-size: 1.3rem;
   height: 50px;
   line-height: 1;
   cursor: pointer;
@@ -86,14 +99,20 @@
   margin: auto;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .title {
     font-size: 2rem;
   }
-  .cartContent {
-    font-size: 1.6rem;
-  }
+
   .sum {
     font-size: 1rem;
+  }
+
+  .orderComplete .address {
+    font-size: 1.2rem;
+  }
+  .orderComplete p {
+    font-size: 2.4rem;
+    margin: 1rem auto;
   }
 }

@@ -105,7 +105,10 @@ const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
         </div>
       )}
       {cartItems}
-      <hr />
+      <div className={classes.hrContainer}>
+        <hr />
+      </div>
+
       <div className={classes.sum}>
         <div> 합계 : {total(items)}원 </div>
       </div>
@@ -128,6 +131,7 @@ const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
       <p>주문완료</p>
 
       <div>{cartItems}</div>
+
       <hr />
       <div className={classes.price}> {total(items)}원 </div>
       <div className={classes.address}> {rdxAddress}</div>
