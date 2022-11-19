@@ -76,7 +76,7 @@ const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
     onClose();
 
     //결제시 장바구니 비우기
-    didSubmit && dispatch(emptyCart());
+    didSubmit && emptyCart();
   };
 
   const cartItems = (
