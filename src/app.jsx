@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getDatabase, ref, child, get } from 'firebase/database';
 import Items from './components/Menu/Items';
 import Header from './components/UI/Header';
-import { addToCart, removeFromCart, getCartTotal } from './modules/cart';
+import { addToCart, removeFromCart } from './modules/cart';
+import { getCartTotal } from './utils/utils';
 import Cart from './components/Cart/Cart';
 
 import OrderList from './components/OrderList/OrderList';
