@@ -46,12 +46,12 @@ function App() {
   const dispatch = useDispatch();
   const onIncrease = useCallback(
     (item) => {
-      return dispatch(addToCart(item));
+      return dispatch(addToCart({ item }));
     },
     [dispatch]
   );
   const onDecrease = useCallback(
-    (id) => dispatch(removeFromCart(id)),
+    (id) => dispatch(removeFromCart({ id })),
     [dispatch]
   );
 
