@@ -5,17 +5,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import { signInWithGoogle, signOutHandler } from '../../firebase';
 import { useAuth } from '../../components/Login/useAuth';
 import { logIn, logOut } from '../../modules/login';
-import { emptyCart } from '../../modules/cart';
+import useCart from '../Hook/useCart';
 
 const Login = (props) => {
   const dispatch = useDispatch();
   const auth = useAuth().auth;
   const user_ = useAuth().user;
   const userInfo = useSelector((state) => state.login?.user);
+
+  const { emptyCart } = useCart();
   function logoutHandler(event) {
     signOutHandler(auth);
     dispatch(logOut());
-    dispatch(emptyCart());
+    emptyCart();
     // document.getElementById('signInDiv').hidden = false;
   }
   const loginHandler = async () => {

@@ -4,7 +4,8 @@ import classes from './Cart.module.css';
 import Modal from '../UI/Modal';
 import CartItem from './CartItem';
 import Checkout from './Checkout';
-import { emptyCart } from '../../modules/cart';
+//import { emptyCart } from '../../modules/cart';
+import useCart from '../Hook/useCart';
 
 const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
   // const [order, setOrder] = useState(false);
@@ -17,6 +18,7 @@ const Cart = ({ items, onClose, onIncrease, onDecrease, total, user }) => {
   const orderTitleRef = useRef();
   const contentRef = useRef();
   const closeRef = useRef();
+  const { emptyCart } = useCart();
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 

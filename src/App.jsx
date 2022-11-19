@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getDatabase, ref, child, get } from 'firebase/database';
 import Items from './components/Menu/Items';
 import Header from './components/UI/Header';
-import { addToCart, removeFromCart } from './modules/cart';
+import useCart from './components/Hook/useCart';
 import { getCartTotal } from './utils/utils';
 import Cart from './components/Cart/Cart';
 
@@ -14,6 +14,7 @@ function App() {
   const userInfo = useSelector((state) => state.login.user);
 
   //주문목록
+  const { addToCart, removeFromCart } = useCart();
   const [orderedList, setOrderedList] = useState([]);
   const [orderListIsShown, setOrderListIsShown] = useState(false);
   const showOrderListHandler = () => {
@@ -44,17 +45,6 @@ function App() {
 
   //증가 감소
   const items = useSelector((state) => state.cart.items);
-  const dispatch = useDispatch();
-  const onIncrease = useCallback(
-    (item) => {
-      return dispatch(addToCart({ item }));
-    },
-    [dispatch]
-  );
-  const onDecrease = useCallback(
-    (id) => dispatch(removeFromCart({ id })),
-    [dispatch]
-  );
 
   //주문페이지
 
@@ -73,8 +63,8 @@ function App() {
         <Cart
           items={items}
           onClose={hideCartHandler}
-          onIncrease={onIncrease}
-          onDecrease={onDecrease}
+          onIncrease={addToCart}
+          onDecrease={removeFromCart}
           total={getCartTotal}
           user={userInfo}
         />
@@ -89,7 +79,7 @@ function App() {
         onShowOrderList={showOrderListHandler}
         onLoadOrderList={loadOrderList}
       />
-      <Items onIncrease={onIncrease} />
+      <Items onIncrease={addToCart} />
     </div>
   );
 }
